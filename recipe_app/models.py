@@ -32,4 +32,4 @@ class User(AbstractUser):
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["username, email, first_name"]
+    REQUIRED_FIELDS = ["email", "first_name"]
