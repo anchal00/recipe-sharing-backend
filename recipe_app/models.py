@@ -1,7 +1,7 @@
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.validators import ASCIIUsernameValidator
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import AbstractUser, UserManager
-from django.contrib.auth.validators import ASCIIUsernameValidator
 
 
 class Recipe(models.Model):
