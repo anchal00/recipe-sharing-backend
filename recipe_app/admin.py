@@ -4,13 +4,13 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserChangeForm
 from django.utils.translation import ugettext_lazy as _
 
-from .models import User
+from recipe_app.models import User
 
 
 class UserAdmin(BaseUserAdmin):
   form = UserChangeForm
   fieldsets = (
-      (None, {'fields': ('email', 'password', )}),
+      (None, {'fields': ('email', 'password', 'username')}),
       (_('Personal info'), {'fields': ('first_name', 'last_name')}),
       (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                      'groups', 'user_permissions')}),

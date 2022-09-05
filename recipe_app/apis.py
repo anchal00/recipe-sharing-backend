@@ -24,9 +24,11 @@ class RecipeViewSet(viewsets.ModelViewSet):
         return Response(self.get_serializer(recipe).data)
 
     def create(self, request):
-        if request.user.is_authenticated:
-            return super().create(request)
-        return Response(status=http_status.HTTP_401_UNAUTHORIZED)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(posted_by=request.user)
+        return Response(serializer.data, status=http_status.HTTP_201_CREATED)
+
         
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer

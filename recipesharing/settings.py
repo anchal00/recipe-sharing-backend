@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'recipe_app'
 ]
 
@@ -72,6 +73,12 @@ DATABASES = {
         'USER': env('DB_USER'),
         'PASSWORD': env('DB_PASS')
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
