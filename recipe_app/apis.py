@@ -5,6 +5,7 @@ from recipe_app.models import Recipe
 
 
 class RecipeSerializer(serializers.ModelSerializer):
+    created_at = serializers.DateTimeField(read_only=True)
     class Meta:
         model = Recipe
         fields = '__all__'
