@@ -1,14 +1,9 @@
-from rest_framework import serializers, viewsets
+from rest_framework import status as http_status
+from rest_framework import viewsets
 from rest_framework.response import Response
 
-from recipe_app.models import Recipe
-
-
-class RecipeSerializer(serializers.ModelSerializer):
-    created_at = serializers.DateTimeField(read_only=True)
-    class Meta:
-        model = Recipe
-        fields = '__all__'
+from recipe_app.models import Recipe, User
+from recipe_app.serializers import RecipeSerializer, UserSerializer
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
@@ -27,3 +22,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, pk=None):
         recipe = self.get_object()
         return Response(self.get_serializer(recipe).data)
+
+    def create(self, request):
+        if request.user.is_authenticated:
+            return super().create(request)
+        return Response(status=http_status.HTTP_401_UNAUTHORIZED)
+        
+class UserViewSet(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
